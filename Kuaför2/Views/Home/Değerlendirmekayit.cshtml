@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Değerlendirmekayit";
+    Layout = "~/Views/Shared/Layoutmusteri.cshtml";
+}
+
+
+<body style="background-image:  url(/kuaför/image/değerlendirme.png);background-position: center;background-size: cover">
+    <form method="post" class="form-inline">   </form>
+
+    </div>
+    </nav><div style=" margin-left: 530px; margin-top: 50px; background-color: transparent; align-items: center" class="wrapper2">
+        <form method="post">
+            <div><h2>Değerlendir</h2></div>
+            <div><label>Puan</label></div>
+            <input type="number" name="ratingValue" min="1" max="5" required>
+            <label>PUAN :</label>
+            <div>
+                <label>YORUM:</label>
+            </div>
+            <div>
+                <textarea style="background-color:azure;" rows="4" cols="50" name="yorum" id="yorum"></textarea>
+            </div>
+            <button name="kayıtbtn" class="btn" type="submit">
+                Kaydet
+            </button>
+            </button>
+        </form>
+</body>

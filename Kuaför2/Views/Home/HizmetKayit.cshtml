@@ -1,0 +1,50 @@
+﻿@model List<Kuaför2.işlemler>
+@{
+
+    Layout = "~/Views/Shared/Layout2.cshtml";
+}
+
+<t<body style="background-image:url(/kuaför/image/hizmetarka.png)">
+    <form method="post" class="form-inline">
+    </form>
+    </div>
+    </nav>
+    <div class="col-lg-12"> <p style="color:blueviolet;"> @ViewBag.mesaj</p><hr /> </div>
+    <div style=" background-color:white;margin-left:350px; margin-top:70px;" class="wrapper4">
+        <form class="form-inline">
+            <h2>Hizmet Kayıt</h2><hr/>
+
+            <table class="table">
+
+
+
+                <tr>
+                    <th>İŞLEMLER</th>
+                    <th>ÜCRET</th>
+
+                    <!-- Diğer sütunlar -->
+                </tr>
+
+
+                @foreach (var veri in Model)
+                {
+                    using (Html.BeginForm("HizmetKayit", "Home", new { id = veri.ID }, FormMethod.Post))
+                    {
+                        <tr>
+
+
+                            <td>@veri.işlem_türü</td>
+                            <td>
+                                <div style="margin-left: 1px; " class="input-box">
+                                    <input style="font-size:17px;width:100px; background-color:white;" name="işlemfiyat2" type="number" class="randevuişlem" placeholder="işlem ücreti"><p class="tl">TL</p>
+                            <td>@*<a href="/Home/silişlem/@veri.işlemlervm.ID" class="btn btn-danger">Sil</a>*@
+                            <td>  <button style="color:forestgreen;" type="submit" class="btn ">Kaydet</button></td></td>
+</div>
+            </td>
+
+
+            </tr>
+        }
+    }
+                </table>
+

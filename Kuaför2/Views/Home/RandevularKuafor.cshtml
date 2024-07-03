@@ -1,0 +1,60 @@
+﻿
+@model Tuple<IEnumerable<Kuaför2.Models.RAndevu>>
+@{
+
+    Layout = "~/Views/Shared/Layout2.cshtml";
+}
+
+@{
+    ViewBag.Title = "Veri Listesi";
+}
+
+<body style="background-image:url(/kuaför/image/randevu.png)">
+    <form method="post" class="form-inline">
+    </form>
+    </div>
+    </nav>
+    <div class="col-lg-12"><hr /> </div>
+    <div style=" background-color:white;margin-left:300px; margin-top:50px;" class="wrapper13">
+        <form class="form-inline">
+            <h2>Randevularım</h2>
+            <table class="table">
+                <tr>
+                    <th>Randevu Numarası</th>
+                    <th>Müşteri</th>
+                    <th>Tarih</th>
+                    <th>Saat</th>
+
+                    <!-- Diğer sütunlar -->
+                </tr>
+                @if (Model != null)
+                {
+                    foreach (var veri in Model.Item1)
+                    {
+
+
+                        <tr>
+                            <td>@veri.randevvm.ID</td>
+                            <td>@veri.müşterivm.Ad  @veri.müşterivm.Soyad</td>
+                            <td>@veri.randevvm.tarih</td>
+
+                            <td>@veri.randevvm.saat</td>
+                            @if (DateTime.Parse(veri.randevvm.tarih) > DateTime.Today)
+                            {
+                                <td><a href="/Home/silkuaför/@veri.randevvm.ID" class="btn btn-danger">iptal et</a></td>
+                            }
+
+
+                            <!-- Diğer sütunlar -->
+                        </tr>
+                    }
+                }
+            </table>
+
+
+    </div>
+    </form>
+    </div>
+
+</body>
+

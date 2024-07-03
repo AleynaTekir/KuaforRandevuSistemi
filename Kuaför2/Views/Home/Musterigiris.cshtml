@@ -1,0 +1,72 @@
+﻿
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/kuaför/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        i {
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body style="background-image:  url(/kuaför/image/loginback.png);background-position: center;background-size: cover">
+
+    <form class="form-inline">
+    </form>
+    </div>
+    </nav>
+    <div style=" margin-left: 550px;margin-top: 170px; align-items: center" class="wrapper2">
+        <form method="post">
+
+            <i style="color: white;font-size: 60px; margin-left: 70px;" class="fa-regular fa-circle-user"></i>
+
+            <h1 style="margin-left:20px; margin-top: 15px ;color: white; font-size: 30px">Müşteri Girişi</h1>
+            <div class="input-box">
+                <input style=" background-color:white;font-size: 20px;" name="AD" type="text" placeholder="  Eposta" required>
+            </div>
+            <div style="margin-left: 1px; margin-top: 10px;" class="input-box">
+                <input style=" background-color:white;font-size: 20px;" name="şifre" type="password" placeholder="  Şifre" required>
+            </div>
+
+            <div>
+                <button style="font-size: 20px; margin-left:15px;" type="submit" class="btn">Giriş  Yap</button>
+            </div>
+            <div class="kayıt-link"><p style="font-size: 20px; color:white;">Kayıtlı Değil Misin?<a href="@Url.Action("Ekle", "Home")" style="font-size: 20px;">Kayıt ol</a></pstyle="font-size:></div>
+            <div class="hata">
+
+                <p style="color:red;">@ViewBag.hata</p>
+
+            </div>
+        </form>
+    </div>
+
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    -->
+</body>
+</html>
+

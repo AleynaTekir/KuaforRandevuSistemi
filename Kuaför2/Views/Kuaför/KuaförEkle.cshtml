@@ -1,0 +1,135 @@
+﻿@model Kuaför2.Models.Class1
+@{
+    ViewBag.Title = "liste";
+    Layout = null;
+}
+@{
+    ViewBag.Title = "MusteriEkle";
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="/kuaför/css/style.css">
+
+</head>
+<body style="background-image: url(/kuaför/image/%C3%96zg%C3%BCrl%C3%BCk,%20cesur%20olmakta%20yatar..png);background-position: center;background-size: cover">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background:transparent;">
+        <form @*action="/Home/KuaförGiris/"*@ method="post" class="form-inline">
+        </form>
+        </div>
+    </nav>
+    <div style=" margin-left: 450px; margin align-items: center; background-color: transparent; border-color: #534369" class="wrapper2">
+        <form action="/Kuaför/Kuaförekle" method="post">
+            <i style="color: white;font-size: 60px; margin-left: 130px;" class="fa-regular fa-circle-user"></i>
+
+            <h1 style="margin-left: 90px; margin-top: 10px ;color: white; font-size: 30px">İşletme Kayıt</h1>
+
+            <script src="~/Scripts/jquery-1.8.0.js"></script>
+            <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+            <script type="text/javascript">
+
+                $(document).ready(function () {
+                    $("#SehirID").change(function () {
+                        var id = $(this).val();
+                        var ilceList = $("#IlceID");
+                        $.ajax({
+                            url: '/Ililce/IlceList',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: { 'id': id },
+                            success: function (data) {
+                                $.each(data, function (index, option) {
+                                    ilceList.append('<option value=' + option.Value + ' >' + option.Text + ' </option>');
+                                });
+                            }
+
+
+
+                        });
+                    });
+                });
+                $(document).ready(function () {
+                    $("#IlceID").change(function () {
+                        var id = $(this).val();
+                        var ilceList = $("#IlceID");
+                        $.ajax({
+                            url: '/Ililce/list',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: { 'id': id },
+                            success: function (data) {
+                                $.each(data, function (index, option) {
+                                    ilceList.append('<option value=' + option.Value + ' >' + option.Text + ' </option>');
+                                });
+                            }
+
+
+
+                        });
+                    });
+                });
+
+
+
+
+            </script>
+
+            @using (Html.BeginForm("Kuaförekle", "Ililce", FormMethod.Post))
+            {<div style="margin-top: 20px; font-size: 20px;" class="input-box1">
+
+                    <input style="background-color: white;" name="ad" type="text" placeholder="  İsim " required>
+                </div> <div>
+                    @Html.DropDownListFor(m => m.SehirID, Model.SehirList, "----------il Seçiniz-------", new { @class = "form-control-float1" })
+                    @Html.DropDownListFor(m => m.IlceID, Model.IlceList, new { @class = "form-control-float2" })
+                </div>
+
+                <div style="margin-top: 5px; width: 20px; font-size: 20px;" class="input-box1">
+                    <input style="background-color: white;" name="adres" type="text" placeholder="  Adres" required>
+                </div>
+                <div style="margin-top: 5px; width: 20px;font-size:20px;" class="input-box1">
+                    <input style="background-color: white;" name="eposta" type="email" placeholder="  E posta" required>
+                </div>
+                <div>
+                    <a style="color: white; font-size: 18px;">Açılış Saati  </a>
+                    <input name="açılışsaati" type="time" style="margin-top: 5px; font-size: 20px; margin-left: 55px; background-color: white; width: 200px;" class="form-control1 " id="time">
+                </div>
+                <div>
+                    <a style="color: white; font-size: 18px;">Kapanış Saati</a>
+                    <input name="kapanışsaati" type="time" style="margin-top: 5px; font-size: 20px; background-color: white; margin-left: 34px;  width: 200px;" type="time" class="form-control2 " id="time">
+                </div>
+
+                <div style="margin-top:5px;" class="input-box1">
+                    <input style="background-color: white; font-size: 20px;" name="tel" type="text" placeholder="  Telefon Numarası" required>
+                </div>
+                <div style="margin-top: 5px;" class="input-box1">
+                    <input style="background-color: white; font-size: 20px;" name="şifre" type="password" placeholder="  Şifre" required>
+                </div>
+
+                <div style="margin-top:5px;" class="input-box1">
+                    <input style="background-color: white; font-size: 20px;" name="konum" type="text" placeholder="konum">
+                </div>
+                <div>
+                    <label style="color:white;">*işletmenize haritada göster özelliği eklemek istiyorsanız yukarıdaki alana konum bağlantı linkini giriniz</label>
+                </div>
+                //Html.DropDownList("DrpSehir", Model.SehirList, "---------Şehir seçin---------", new { @class = "form-control" })
+
+                <div>
+                    <button style="margin-left: 80px; font-size: 25px;; border-color: blueviolet;" type="submit" class="btn">Kayıt ol</button>
+                    <a href="@Url.Action("KuaförGiriş", "Kuaför")" style="color:white; font-size:20px;">Giriş yap</a>
+                </div>
+
+                <div class="hata">
+
+                    <p>@ViewBag.hata</p>
+
+                </div>
+
+            }
+
+
+
+
+        </form>
+    </div>

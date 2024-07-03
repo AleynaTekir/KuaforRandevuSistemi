@@ -1,0 +1,86 @@
+﻿
+@model Tuple<IEnumerable<Kuaför2.Models.randev>>
+@{
+    ViewBag.Title = "Randevulist";
+    Layout = "~/Views/Shared/Layoutmusteri.cshtml";
+
+}
+
+<body style="background-color:lightgrey">
+    <form method="post" class="form-inline">   </form>
+
+    </div>
+    </nav>
+    <div class="row">
+        <div style="margin-left:20px; font-size:medium;"></div>
+
+        @if (Model != null)
+        {
+            foreach (var item in Model.Item1)
+            {
+
+
+
+                <div class="col-md-4">
+                    <form method="post">
+                        <div style="border: 15px solid rgba(255, 255, 255, .5); border-radius: 35px; margin-top: 30px; margin-left: 30px; margin-right: 30px;" class="card">
+                            @*//<img style="margin-left:50px; width: 250px; height: 250px; border: 15px solid rgba(255, 255, 255, .5); border-radius: 115px; " src="~/kuaför/image/Güzellik Salonu.png" class="card-img-top" alt="...">*@
+
+                            <div class="card-body">
+
+
+                                <h4 class="card-title"><a style="color:black;">@item.kuaförvm.AD</a></h4>
+                                <hr />
+
+                                @*<p><a style="font-style:italic"> İşlem:</a>@item.işlemvm.işlem_türü</p>*@
+                                <hr />
+                                <p><i style="color: #534369; margin-right: 10px;" class="fa-solid fa-calendar-days"></i><a style="font-style:italic">Tarih:</a>@item.randevvm.tarih</p>
+                                <hr />
+
+                                <p><i style="color: #534369; margin-right: 10px;" class="fa-regular fa-clock"></i><a style="font-style:italic">Saat:</a>@item.randevvm.saat</p>
+                                <hr />
+                                <p><i style="color: #534369; margin-right: 10px;" class="fa-solid fa-location-dot"></i><a style="font-style:italic">Adres:</a>@item.kuaförvm.Adres</p><br>
+                                <hr />
+                                <p><i style="color: #534369; margin-right:10px;" class="fa-solid fa-phone"></i><a style="font-style:italic">Telefon Numarası:</a>@item.kuaförvm.Telefon_numarası</p>
+                                <hr />
+                                <p><i style="color: #534369; margin-right:3px;" class="fa-regular fa-envelope"></i><a style="font-style:italic">Email:</a>@item.kuaförvm.Eposta</p>
+                            </div>
+                            <div class="card-footer">
+                                @if (DateTime.Parse(item.randevvm.tarih) < DateTime.Now)
+                                {
+
+
+                                    <a href="/Home/Değerlendirmekayit/@item.randevvm.ID" type="submit" class="btn btn-primary">Değerlendir</a>
+
+                                }
+                                else
+                                {
+
+
+
+
+
+                                    <a href="/Home/sil/@item.randevvm.ID" class="btn btn-danger" name="silbtn">iptal et</a>
+
+
+                                }
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+            }
+        }
+        else
+        {
+            @ViewBag.mesaj
+        }
+
+
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+

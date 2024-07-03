@@ -1,0 +1,60 @@
+﻿
+@model List<Kuaför2.Kuaför>
+@{
+    ViewBag.Title = "KuaförBilgi";
+    Layout = "~/Views/Shared/Layout2.cshtml";
+}
+
+<head>
+
+    <link rel="stylesheet" href="/kuaför/css/style.css">
+
+</head>
+<body style="  background-position: center;">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background:transparent;">
+        <form @*action="/Home/KuaförGiris/"*@ method="post" class="form-inline">
+        </form>
+        </div>
+    </nav>
+    <div style=" margin-top:40px;background-color: gray; margin-left: 450px; align-items: center" class="wrapper2">
+        <form method="post">
+            @foreach (var item in Model)
+            {
+
+                <h1 style="margin-left: 90px; margin-top: 15px ;color: white; font-size: 30px">İşletme Bilgileri</h1>
+                <div style="margin-top: 25px;" class="input-box1">
+
+                    <input name="ad" style="background-color:white;" type="text" value=@item.AD required>
+                </div>
+                <div style="margin-top: 10px; width: 20px;" class="input-box1">
+                    <input style="background-color: white;" name="adres" type="text" value=@item.Adres required>
+                </div>
+                <div style="margin-top: 10px; width: 20px;" class="input-box1">
+                    <input style="background-color: white;" name="eposta" type="email" value=@item.Eposta required>
+                </div>
+                <div>
+                    <a style="color:black;">Açılış Saati  </a>
+                    <input value=@item.açılış_saati name="açılışsaati" style="margin-top: 10px; background-color: white; margin-left: 55px; width: 200px; " type="time" class="form-control1 " id="time">
+                </div>
+                <div>
+                    <a style="color:black;">Kapanış Saati</a>
+                    <input value=@item.kapanış_saati name="kapanışsaati" style="margin-top: 10px; background-color: white; margin-left: 36px;  width: 200px;" type="time" class="form-control2 " id="time">
+                </div>
+
+                <div style="margin-top: 10px;" class="input-box1">
+                    <input style="background-color: white;" name="tel" type="text" value=@item.Telefon_numarası
+                </div>
+
+
+
+                <div>
+                    <button style=" margin-left: 80px; margin-top: 10px;; cursor: pointer; border-radius: 40px; border-color: black;" type="submit" class="btn">Güncelle</button>
+
+                </div>
+
+            }
+        </form>
+    </div>
+
+</body>
+

@@ -1,0 +1,215 @@
+﻿
+@model Kuaför2.Models.Class1
+@{
+    ViewBag.Title = "liste";
+    Layout = null;
+}
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/kuaför/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        i {
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body style="background-color:lightgrey">
+    @*<form class="form-inline">
+        </form>
+        </div>
+        </nav>*@
+    <form method="post">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#534369">
+            <i style="color: antiquewhite" class="fa-solid fa-splotch"></i>
+
+
+            <a class="navbar-brand" href="@Url.Action("Index","Home")" style="color:aliceblue; font-style: italic; font-weight: 500;">Kuaför'üm</a>
+
+
+
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor03">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+
+                        <a class="nav-link" href="@Url.Action("KuaförBilgi", "Home")" style="color: aliceblue">Bilgilerim <span class="sr-only">(current)</span></a>
+
+                    </li>
+
+                    <li class="nav-item active">
+
+                        <a class="nav-link" href="@Url.Action("Kuaförişlem", "Home")" style="color: aliceblue">İşlem Ekle <span class="sr-only">(current)</span></a>
+
+                    </li>
+                    <li class="nav-item active">
+
+                        <a class="nav-link" href="@Url.Action("KuaförHizmet", "Home")" style="color: aliceblue">Hizmetlerim <span class="sr-only">(current)</span></a>
+
+                    </li>
+
+
+
+                    <li class="nav-item">
+
+
+                    </li>
+                </ul>
+
+                <a class="nav-link" href="@Url.Action("Randevularım", "Home")" style="color: aliceblue">Randevular <span class="sr-only">(current)</span></a>
+                <a style="color:aliceblue;" class="nav-link">@User.Identity.Name</a>
+
+                <a class="nav-link" href="/Home/logout/" style="font-weight: 600; color:aliceblue">Çıkış</a>
+
+    </form>
+    </div>
+    </nav>
+    <script src="~/Scripts/jquery-1.8.0.js"></script>
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#SehirID").change(function () {
+                var id = $(this).val();
+                var ilceList = $("#IlceID");
+                $.ajax({
+                    url: '/Ililce/IlceList',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { 'id': id },
+                    success: function (data) {
+                        $.each(data, function (index, option) {
+                            ilceList.append('<option value=' + option.Value + ' >' + option.Text + ' </option>');
+                        });
+                    }
+
+
+
+                });
+            });
+        });
+        $(document).ready(function () {
+            $("#IlceID").change(function () {
+                var id = $(this).val();
+                var ilceList = $("#IlceID");
+                $.ajax({
+                    url: '/Ililce/list',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { 'id': id },
+                    success: function (data) {
+                        $.each(data, function (index, option) {
+                            ilceList.append('<option value=' + option.Value + ' >' + option.Text + ' </option>');
+                        });
+                    }
+
+
+
+                });
+            });
+        });
+
+
+
+
+    </script>
+
+
+
+    @using (Html.BeginForm("liste", "Ililce", FormMethod.Post))
+    {
+        //Html.DropDownList("DrpSehir", Model.SehirList, "---------Şehir seçin---------", new { @class = "form-control" })
+        <div>
+            @Html.DropDownListFor(m => m.SehirID, Model.SehirList, "---il Seçiniz---", new { @class = "form-control-float1" })
+            @Html.DropDownListFor(m => m.IlceID, Model.IlceList, new { @class = "form-control-float2" })
+            <button href="" style="margin-left:5px; color:aliceblue; background-color: #655280" type="submit" class="btn-ara">Ara</button>
+        </div>
+        @ViewBag.mesaj;
+
+    }
+    <div class="row">
+        <form method="post" class="form-inline">
+
+            <form></form>
+
+            @if (Model.KuaförList != null)
+            {
+                foreach (var kuaför in Model.KuaförList)
+                {
+
+                    <div class="col-md-4">
+                        <div style="border: 15px solid rgba(255, 255, 255, .5); border-radius: 35px; margin-top: 30px; margin-left: 30px; margin-right: 30px;" class="card">
+                            <img style="margin-left:50px; width: 250px; height: 250px; border: 15px solid rgba(255, 255, 255, .5); border-radius: 115px; " src="~/kuaför/image/Güzellik Salonu.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title"><a style="color:black;" href="/Home/Kuafördetay/@kuaför.ID">@kuaför.AD</a></h5>
+                                <div><h6><i style="color: #534369; margin-right: 10px;" class="fa-solid fa-location-dot"></i>@kuaför.Adres</h6></div>
+                                @*@for (var i = 1; i <= @kuaför.puan; i++)
+                                    {
+
+                                        <i style="color:yellow;" class="fa-solid fa-star"></i>
+                                    }
+
+
+                                    @for (var j = 1; j <= 5 - @kuaför.puan; j++)
+                                    {
+
+                                        <i style="color:silver;" class="fa-solid fa-star"></i>
+
+                                    }*@
+                                (@kuaför.puan)
+                                @for (var i = 1; i <= Math.Round(((double)@kuaför.puan)); i++)
+                                {
+
+                                    <i style="color:yellow;" class="fa-solid fa-star"></i>
+                                }
+
+
+                                @for (var j = 1; j <= Math.Round(((double)(5 - @kuaför.puan))); j++)
+                                {
+
+                                    <i style="color:silver;" class="fa-solid fa-star"></i>
+
+                                }
+                                @*<i style="color:darkorange;" class="fa-solid fa-star"></i>
+                                    <i style="color:darkorange;" class="fa-solid fa-star"></i>
+                                    <i style="color:darkorange;" class="fa-solid fa-star"></i>
+                                    <i style="color:darkorange;" class="fa-solid fa-star"></i>
+                                    <i style="color:darkorange;" class="fa-solid fa-star-half"></i>*@
+                            </div>
+
+                            <div class="card-footer">
+                                <small class="text-muted">iletişim:@kuaför.Telefon_numarası</small><br>
+                                <small class="text-muted">@kuaför.Eposta</small>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </form>
+    </div>
+    <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script src="~/Scripts/jquery-1.8.0.js"></script>
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    -->
+    </bodystyle="background-color:lightgrey">
+
+
+

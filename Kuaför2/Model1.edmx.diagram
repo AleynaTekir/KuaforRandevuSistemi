@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0d619a58ade446ee83b29c0e5dfec090" Name="Diagram1">
+        <EntityTypeShape EntityType="KuaförModel.değerlendirme" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KuaförModel.İl" Width="1.5" PointX="5.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KuaförModel.İlçe" Width="1.5" PointX="8" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KuaförModel.işlem_ücret" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KuaförModel.işlemler" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KuaförModel.Kuaför" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KuaförModel.müşteri" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KuaförModel.randevu" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KuaförModel.randevu_işlem" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KuaförModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="8" IsExpanded="true" />
+        <AssociationConnector Association="KuaförModel.FK_değerlendirme_Kuaför" ManuallyRouted="false" />
+        <AssociationConnector Association="KuaförModel.FK_değerlendirme_müşteri" ManuallyRouted="false" />
+        <AssociationConnector Association="KuaförModel.FK_ilceler_iller" ManuallyRouted="false" />
+        <AssociationConnector Association="KuaförModel.FK_işlem_ücret_işlemler" ManuallyRouted="false" />
+        <AssociationConnector Association="KuaförModel.FK_işlem_ücret_Kuaför" ManuallyRouted="false" />
+        <AssociationConnector Association="KuaförModel.FK_randevu_işlem_işlemler" ManuallyRouted="false" />
+        <AssociationConnector Association="KuaförModel.FK_randevu_Kuaför" ManuallyRouted="false" />
+        <AssociationConnector Association="KuaförModel.FK_randevu_müşteri" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,645 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="KuaförModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="değerlendirme">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Puan" Type="int" />
+          <Property Name="Yorum" Type="nchar" MaxLength="800" />
+          <Property Name="Kuaför" Type="int" />
+          <Property Name="Müşteri" Type="int" />
+        </EntityType>
+        <EntityType Name="İl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="İlAdı" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="İlçe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="İlçeAdı" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="İlID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="işlem ücret">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ücret" Type="int" />
+          <Property Name="kuaför" Type="int" />
+          <Property Name="işlem" Type="int" />
+        </EntityType>
+        <EntityType Name="işlemler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="işlem türü" Type="nchar" MaxLength="60" />
+          <Property Name="check" Type="bit" />
+        </EntityType>
+        <EntityType Name="Kuaför">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AD" Type="nchar" MaxLength="40" Nullable="false" />
+          <Property Name="Adres" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefon_numarası" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Eposta" Type="nchar" MaxLength="80" Nullable="false" />
+          <Property Name="açılış saati" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="kapanış saati" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="şifre" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="puan" Type="float" />
+          <Property Name="il" Type="nchar" MaxLength="30" />
+          <Property Name="ilçe" Type="nchar" MaxLength="30" />
+          <Property Name="Konum" Type="ntext" />
+        </EntityType>
+        <EntityType Name="müşteri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="nchar" MaxLength="30" />
+          <Property Name="Soyad" Type="nchar" MaxLength="30" />
+          <Property Name="Telefon_numarası" Type="nvarchar" MaxLength="50" />
+          <Property Name="eposta" Type="nchar" MaxLength="40" />
+          <Property Name="şifre" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="randevu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kuaför" Type="int" Nullable="false" />
+          <Property Name="müşteri" Type="int" Nullable="false" />
+          <Property Name="tarih" Type="char" MaxLength="20" />
+          <Property Name="saat" Type="nchar" MaxLength="20" />
+          <Property Name="tutar" Type="int" />
+        </EntityType>
+        <EntityType Name="randevu işlem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="randevu" Type="int" Nullable="false" />
+          <Property Name="işlem" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_değerlendirme_Kuaför">
+          <End Role="Kuaför" Type="Self.Kuaför" Multiplicity="0..1" />
+          <End Role="değerlendirme" Type="Self.değerlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kuaför">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="değerlendirme">
+              <PropertyRef Name="Kuaför" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_değerlendirme_müşteri">
+          <End Role="müşteri" Type="Self.müşteri" Multiplicity="0..1" />
+          <End Role="değerlendirme" Type="Self.değerlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="müşteri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="değerlendirme">
+              <PropertyRef Name="Müşteri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ilceler_iller">
+          <End Role="İl" Type="Self.İl" Multiplicity="1" />
+          <End Role="İlçe" Type="Self.İlçe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="İl">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="İlçe">
+              <PropertyRef Name="İlID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_işlem ücret_işlemler">
+          <End Role="işlemler" Type="Self.işlemler" Multiplicity="0..1" />
+          <End Role="işlem ücret" Type="Self.işlem ücret" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="işlemler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="işlem ücret">
+              <PropertyRef Name="işlem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_işlem ücret_Kuaför">
+          <End Role="Kuaför" Type="Self.Kuaför" Multiplicity="0..1" />
+          <End Role="işlem ücret" Type="Self.işlem ücret" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kuaför">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="işlem ücret">
+              <PropertyRef Name="kuaför" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_randevu işlem_işlemler">
+          <End Role="işlemler" Type="Self.işlemler" Multiplicity="1" />
+          <End Role="randevu işlem" Type="Self.randevu işlem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="işlemler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="randevu işlem">
+              <PropertyRef Name="işlem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_randevu_Kuaför">
+          <End Role="Kuaför" Type="Self.Kuaför" Multiplicity="1" />
+          <End Role="randevu" Type="Self.randevu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kuaför">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="randevu">
+              <PropertyRef Name="Kuaför" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_randevu_müşteri">
+          <End Role="müşteri" Type="Self.müşteri" Multiplicity="1" />
+          <End Role="randevu" Type="Self.randevu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="müşteri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="randevu">
+              <PropertyRef Name="müşteri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KuaförModelStoreContainer">
+          <EntitySet Name="değerlendirme" EntityType="Self.değerlendirme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="İl" EntityType="Self.İl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="İlçe" EntityType="Self.İlçe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="işlem ücret" EntityType="Self.işlem ücret" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="işlemler" EntityType="Self.işlemler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kuaför" EntityType="Self.Kuaför" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="müşteri" EntityType="Self.müşteri" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="randevu" EntityType="Self.randevu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="randevu işlem" EntityType="Self.randevu işlem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_değerlendirme_Kuaför" Association="Self.FK_değerlendirme_Kuaför">
+            <End Role="Kuaför" EntitySet="Kuaför" />
+            <End Role="değerlendirme" EntitySet="değerlendirme" />
+          </AssociationSet>
+          <AssociationSet Name="FK_değerlendirme_müşteri" Association="Self.FK_değerlendirme_müşteri">
+            <End Role="müşteri" EntitySet="müşteri" />
+            <End Role="değerlendirme" EntitySet="değerlendirme" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ilceler_iller" Association="Self.FK_ilceler_iller">
+            <End Role="İl" EntitySet="İl" />
+            <End Role="İlçe" EntitySet="İlçe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_işlem ücret_işlemler" Association="Self.FK_işlem ücret_işlemler">
+            <End Role="işlemler" EntitySet="işlemler" />
+            <End Role="işlem ücret" EntitySet="işlem ücret" />
+          </AssociationSet>
+          <AssociationSet Name="FK_işlem ücret_Kuaför" Association="Self.FK_işlem ücret_Kuaför">
+            <End Role="Kuaför" EntitySet="Kuaför" />
+            <End Role="işlem ücret" EntitySet="işlem ücret" />
+          </AssociationSet>
+          <AssociationSet Name="FK_randevu işlem_işlemler" Association="Self.FK_randevu işlem_işlemler">
+            <End Role="işlemler" EntitySet="işlemler" />
+            <End Role="randevu işlem" EntitySet="randevu işlem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_randevu_Kuaför" Association="Self.FK_randevu_Kuaför">
+            <End Role="Kuaför" EntitySet="Kuaför" />
+            <End Role="randevu" EntitySet="randevu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_randevu_müşteri" Association="Self.FK_randevu_müşteri">
+            <End Role="müşteri" EntitySet="müşteri" />
+            <End Role="randevu" EntitySet="randevu" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KuaförModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="değerlendirme">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Puan" Type="Int32" />
+          <Property Name="Yorum" Type="String" MaxLength="800" FixedLength="true" Unicode="true" />
+          <Property Name="Kuaför" Type="Int32" />
+          <Property Name="Müşteri" Type="Int32" />
+          <NavigationProperty Name="Kuaför1" Relationship="Self.FK_değerlendirme_Kuaför" FromRole="değerlendirme" ToRole="Kuaför" />
+          <NavigationProperty Name="müşteri1" Relationship="Self.FK_değerlendirme_müşteri" FromRole="değerlendirme" ToRole="müşteri" />
+        </EntityType>
+        <EntityType Name="İl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="İlAdı" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="İlçe" Relationship="Self.FK_ilceler_iller" FromRole="İl" ToRole="İlçe" />
+        </EntityType>
+        <EntityType Name="İlçe">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="İlçeAdı" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="İlID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="İl" Relationship="Self.FK_ilceler_iller" FromRole="İlçe" ToRole="İl" />
+        </EntityType>
+        <EntityType Name="işlem_ücret">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ücret" Type="Int32" />
+          <Property Name="kuaför" Type="Int32" />
+          <Property Name="işlem" Type="Int32" />
+          <NavigationProperty Name="işlemler" Relationship="Self.FK_işlem_ücret_işlemler" FromRole="işlem_ücret" ToRole="işlemler" />
+          <NavigationProperty Name="Kuaför1" Relationship="Self.FK_işlem_ücret_Kuaför" FromRole="işlem_ücret" ToRole="Kuaför" />
+        </EntityType>
+        <EntityType Name="işlemler">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="işlem_türü" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+          <Property Name="check" Type="Boolean" />
+          <NavigationProperty Name="işlem_ücret" Relationship="Self.FK_işlem_ücret_işlemler" FromRole="işlemler" ToRole="işlem_ücret" />
+          <NavigationProperty Name="randevu_işlem" Relationship="Self.FK_randevu_işlem_işlemler" FromRole="işlemler" ToRole="randevu_işlem" />
+        </EntityType>
+        <EntityType Name="Kuaför">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AD" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Adres" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Telefon_numarası" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Eposta" Type="String" MaxLength="80" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="açılış_saati" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="kapanış_saati" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="şifre" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="puan" Type="Double" />
+          <Property Name="il" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="ilçe" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Konum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="değerlendirme" Relationship="Self.FK_değerlendirme_Kuaför" FromRole="Kuaför" ToRole="değerlendirme" />
+          <NavigationProperty Name="işlem_ücret" Relationship="Self.FK_işlem_ücret_Kuaför" FromRole="Kuaför" ToRole="işlem_ücret" />
+          <NavigationProperty Name="randevu" Relationship="Self.FK_randevu_Kuaför" FromRole="Kuaför" ToRole="randevu" />
+        </EntityType>
+        <EntityType Name="müşteri">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Soyad" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Telefon_numarası" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="eposta" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="şifre" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="değerlendirme" Relationship="Self.FK_değerlendirme_müşteri" FromRole="müşteri" ToRole="değerlendirme" />
+          <NavigationProperty Name="randevu" Relationship="Self.FK_randevu_müşteri" FromRole="müşteri" ToRole="randevu" />
+        </EntityType>
+        <EntityType Name="randevu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kuaför" Type="Int32" Nullable="false" />
+          <Property Name="müşteri" Type="Int32" Nullable="false" />
+          <Property Name="tarih" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="saat" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="tutar" Type="Int32" />
+          <NavigationProperty Name="Kuaför1" Relationship="Self.FK_randevu_Kuaför" FromRole="randevu" ToRole="Kuaför" />
+          <NavigationProperty Name="müşteri1" Relationship="Self.FK_randevu_müşteri" FromRole="randevu" ToRole="müşteri" />
+        </EntityType>
+        <EntityType Name="randevu_işlem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="randevu" Type="Int32" Nullable="false" />
+          <Property Name="işlem" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="işlemler" Relationship="Self.FK_randevu_işlem_işlemler" FromRole="randevu_işlem" ToRole="işlemler" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_değerlendirme_Kuaför">
+          <End Role="Kuaför" Type="Self.Kuaför" Multiplicity="0..1" />
+          <End Role="değerlendirme" Type="Self.değerlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kuaför">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="değerlendirme">
+              <PropertyRef Name="Kuaför" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_değerlendirme_müşteri">
+          <End Role="müşteri" Type="Self.müşteri" Multiplicity="0..1" />
+          <End Role="değerlendirme" Type="Self.değerlendirme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="müşteri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="değerlendirme">
+              <PropertyRef Name="Müşteri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ilceler_iller">
+          <End Role="İl" Type="Self.İl" Multiplicity="1" />
+          <End Role="İlçe" Type="Self.İlçe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="İl">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="İlçe">
+              <PropertyRef Name="İlID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_işlem_ücret_işlemler">
+          <End Role="işlemler" Type="Self.işlemler" Multiplicity="0..1" />
+          <End Role="işlem_ücret" Type="Self.işlem_ücret" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="işlemler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="işlem_ücret">
+              <PropertyRef Name="işlem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_işlem_ücret_Kuaför">
+          <End Role="Kuaför" Type="Self.Kuaför" Multiplicity="0..1" />
+          <End Role="işlem_ücret" Type="Self.işlem_ücret" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kuaför">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="işlem_ücret">
+              <PropertyRef Name="kuaför" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_randevu_işlem_işlemler">
+          <End Role="işlemler" Type="Self.işlemler" Multiplicity="1" />
+          <End Role="randevu_işlem" Type="Self.randevu_işlem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="işlemler">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="randevu_işlem">
+              <PropertyRef Name="işlem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_randevu_Kuaför">
+          <End Role="Kuaför" Type="Self.Kuaför" Multiplicity="1" />
+          <End Role="randevu" Type="Self.randevu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kuaför">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="randevu">
+              <PropertyRef Name="Kuaför" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_randevu_müşteri">
+          <End Role="müşteri" Type="Self.müşteri" Multiplicity="1" />
+          <End Role="randevu" Type="Self.randevu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="müşteri">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="randevu">
+              <PropertyRef Name="müşteri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KuaförEntities25" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="değerlendirme" EntityType="Self.değerlendirme" />
+          <EntitySet Name="İl" EntityType="Self.İl" />
+          <EntitySet Name="İlçe" EntityType="Self.İlçe" />
+          <EntitySet Name="işlem_ücret" EntityType="Self.işlem_ücret" />
+          <EntitySet Name="işlemler" EntityType="Self.işlemler" />
+          <EntitySet Name="Kuaför" EntityType="Self.Kuaför" />
+          <EntitySet Name="müşteri" EntityType="Self.müşteri" />
+          <EntitySet Name="randevu" EntityType="Self.randevu" />
+          <EntitySet Name="randevu_işlem" EntityType="Self.randevu_işlem" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_değerlendirme_Kuaför" Association="Self.FK_değerlendirme_Kuaför">
+            <End Role="Kuaför" EntitySet="Kuaför" />
+            <End Role="değerlendirme" EntitySet="değerlendirme" />
+          </AssociationSet>
+          <AssociationSet Name="FK_değerlendirme_müşteri" Association="Self.FK_değerlendirme_müşteri">
+            <End Role="müşteri" EntitySet="müşteri" />
+            <End Role="değerlendirme" EntitySet="değerlendirme" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ilceler_iller" Association="Self.FK_ilceler_iller">
+            <End Role="İl" EntitySet="İl" />
+            <End Role="İlçe" EntitySet="İlçe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_işlem_ücret_işlemler" Association="Self.FK_işlem_ücret_işlemler">
+            <End Role="işlemler" EntitySet="işlemler" />
+            <End Role="işlem_ücret" EntitySet="işlem_ücret" />
+          </AssociationSet>
+          <AssociationSet Name="FK_işlem_ücret_Kuaför" Association="Self.FK_işlem_ücret_Kuaför">
+            <End Role="Kuaför" EntitySet="Kuaför" />
+            <End Role="işlem_ücret" EntitySet="işlem_ücret" />
+          </AssociationSet>
+          <AssociationSet Name="FK_randevu_işlem_işlemler" Association="Self.FK_randevu_işlem_işlemler">
+            <End Role="işlemler" EntitySet="işlemler" />
+            <End Role="randevu_işlem" EntitySet="randevu_işlem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_randevu_Kuaför" Association="Self.FK_randevu_Kuaför">
+            <End Role="Kuaför" EntitySet="Kuaför" />
+            <End Role="randevu" EntitySet="randevu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_randevu_müşteri" Association="Self.FK_randevu_müşteri">
+            <End Role="müşteri" EntitySet="müşteri" />
+            <End Role="randevu" EntitySet="randevu" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KuaförModelStoreContainer" CdmEntityContainer="KuaförEntities25">
+          <EntitySetMapping Name="değerlendirme">
+            <EntityTypeMapping TypeName="KuaförModel.değerlendirme">
+              <MappingFragment StoreEntitySet="değerlendirme">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Puan" ColumnName="Puan" />
+                <ScalarProperty Name="Yorum" ColumnName="Yorum" />
+                <ScalarProperty Name="Kuaför" ColumnName="Kuaför" />
+                <ScalarProperty Name="Müşteri" ColumnName="Müşteri" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="İl">
+            <EntityTypeMapping TypeName="KuaförModel.İl">
+              <MappingFragment StoreEntitySet="İl">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="İlAdı" ColumnName="İlAdı" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="İlçe">
+            <EntityTypeMapping TypeName="KuaförModel.İlçe">
+              <MappingFragment StoreEntitySet="İlçe">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="İlçeAdı" ColumnName="İlçeAdı" />
+                <ScalarProperty Name="İlID" ColumnName="İlID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="işlem_ücret">
+            <EntityTypeMapping TypeName="KuaförModel.işlem_ücret">
+              <MappingFragment StoreEntitySet="işlem ücret">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ücret" ColumnName="ücret" />
+                <ScalarProperty Name="kuaför" ColumnName="kuaför" />
+                <ScalarProperty Name="işlem" ColumnName="işlem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="işlemler">
+            <EntityTypeMapping TypeName="KuaförModel.işlemler">
+              <MappingFragment StoreEntitySet="işlemler">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="işlem_türü" ColumnName="işlem türü" />
+                <ScalarProperty Name="check" ColumnName="check" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kuaför">
+            <EntityTypeMapping TypeName="KuaförModel.Kuaför">
+              <MappingFragment StoreEntitySet="Kuaför">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AD" ColumnName="AD" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Telefon_numarası" ColumnName="Telefon_numarası" />
+                <ScalarProperty Name="Eposta" ColumnName="Eposta" />
+                <ScalarProperty Name="açılış_saati" ColumnName="açılış saati" />
+                <ScalarProperty Name="kapanış_saati" ColumnName="kapanış saati" />
+                <ScalarProperty Name="şifre" ColumnName="şifre" />
+                <ScalarProperty Name="puan" ColumnName="puan" />
+                <ScalarProperty Name="il" ColumnName="il" />
+                <ScalarProperty Name="ilçe" ColumnName="ilçe" />
+                <ScalarProperty Name="Konum" ColumnName="Konum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="müşteri">
+            <EntityTypeMapping TypeName="KuaförModel.müşteri">
+              <MappingFragment StoreEntitySet="müşteri">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="Telefon_numarası" ColumnName="Telefon_numarası" />
+                <ScalarProperty Name="eposta" ColumnName="eposta" />
+                <ScalarProperty Name="şifre" ColumnName="şifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="randevu">
+            <EntityTypeMapping TypeName="KuaförModel.randevu">
+              <MappingFragment StoreEntitySet="randevu">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Kuaför" ColumnName="Kuaför" />
+                <ScalarProperty Name="müşteri" ColumnName="müşteri" />
+                <ScalarProperty Name="tarih" ColumnName="tarih" />
+                <ScalarProperty Name="saat" ColumnName="saat" />
+                <ScalarProperty Name="tutar" ColumnName="tutar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="randevu_işlem">
+            <EntityTypeMapping TypeName="KuaförModel.randevu_işlem">
+              <MappingFragment StoreEntitySet="randevu işlem">
+                <ScalarProperty Name="randevu" ColumnName="randevu" />
+                <ScalarProperty Name="işlem" ColumnName="işlem" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="KuaförModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
